@@ -1,10 +1,18 @@
-class = require 'middleclass'
+Object = require 'classic'
+
 AnimatedSprite = require 'animatedsprite'
 
+local expl = nil
+
 function love.load()
-    anim_sprite = AnimatedSprite:new("assets/testsheet.png", 4, 4)
-    anim_sprite:addAnimation("cycle", "1-5", 1, true)
-    anim_sprite:play("cycle")
+    love.graphics.setDefaultFilter("nearest", "nearest")
+
+    anim_sprite = AnimatedSprite("assets/hero.png", 6, 5)
+    anim_sprite:addAnimation("idle", "1-4", 10, true)
+    anim_sprite:addAnimation("run", "7-12", 15, true)
+    anim_sprite:addAnimation("swim", "19-24", 15, true)
+    anim_sprite:addAnimation("punch", "25,26,27", 5, true)
+    anim_sprite:play("run")
 end
 
 function love.update(dt)
@@ -12,6 +20,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    anim_sprite:draw(0, 0)
+    love.graphics.clear(.25, .25, .25)
+    anim_sprite:draw(100, 100, 0, 4, 4)
 end
 
